@@ -48,7 +48,7 @@ namespace DK.Tweening
         public static DKSequence CreateBranch(BranchType branchType)
         {
             if (branchStack.Peek().type == BranchType.None)
-                throw new System.Exception("Incorrect tweener usgage! There are no master branch to branch from!");
+                throw new System.Exception("Incorrect tween usage! There are no master sequence to branch from!");
 
             (GameObject target, Sequence sequence, BranchType type) branch;
 
@@ -59,7 +59,6 @@ namespace DK.Tweening
             if (branchType == BranchType.Async)
             {
                 //Create separateSequense
-
                 branch.type = BranchType.Async;                
             }
 
