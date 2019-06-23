@@ -7,6 +7,6 @@ namespace DK
         Animator _animator;
         public Animator animator => _animator = _animator ?? GetComponent<Animator>();
 
-              
+        
     }
 }
