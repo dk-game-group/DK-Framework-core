@@ -44,5 +44,6 @@ namespace DK
             get => tr.localScale;
             set => tr.localScale = value;
         }
+
     }
 }

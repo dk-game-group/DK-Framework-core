@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace DK.Tools
 {
-    public static class Math
+    public static class Mathf
     {
         public static float WrapAngle(float angle)
         {
@@ -14,8 +14,5 @@ namespace DK.Tools
 
             return angle;
         }
-
-
-
     }
 }

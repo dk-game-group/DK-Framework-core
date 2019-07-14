@@ -10,8 +10,8 @@ namespace DK.Systems
         GameObject originalGameObject;
 
         private int poolSize;
-        public int maxSize { get; protected set;}
-        
+        public int maxSize { get; protected set; }
+
         protected List<(GameObject go, T script)> pool;           //complete list of all elements linked to pool
         protected List<(GameObject go, T script)> activeElements; //list of all elements which are active in game
         protected List<(GameObject go, T script)> storedElements; //list of inactive elements stored for future use
@@ -27,7 +27,7 @@ namespace DK.Systems
 
         protected virtual void Init()
         {
-            pool           = new List<(GameObject go, T script)>(poolSize);
+            pool = new List<(GameObject go, T script)>(poolSize);
             activeElements = new List<(GameObject go, T script)>(poolSize);
             storedElements = new List<(GameObject go, T script)>(poolSize);
 
@@ -57,9 +57,9 @@ namespace DK.Systems
             activeElements.Add(element);
 
             element.go.SetActive(true);
-            element.script.OnCreate();
+            //element.script.OnCreate();
             //element.pool = this;
-                
+
             return element.script;
         }
 
@@ -74,7 +74,5 @@ namespace DK.Systems
             for (int i = pool.Count - 1; i >= 0; i--)
                 action(pool[i].script);
         }
-
-
     }
 }

@@ -8,17 +8,24 @@ namespace DK
 {
     public partial class DKBehaviour : DKTweener
     {
+
         public Pool<DKBehaviour> parentPool;
 
         // DK systems callbacks
-        public virtual void OnCreate() {            
+        protected virtual void OnCreate()
+        {
+
         }
 
-
-        //Unity MonoBehaveour overrides
-        public void Instantiate()
+        protected virtual void OnDestroy()
         {
-            
+
+        }
+         
+        //Unity MonoBehaveour overrides
+        public static void Instantiate()
+        {
+            Debug.Log(nameof(DKBehaviour));
         }
     }
 }
