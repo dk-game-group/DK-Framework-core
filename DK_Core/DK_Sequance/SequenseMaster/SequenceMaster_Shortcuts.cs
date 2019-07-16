@@ -9,23 +9,35 @@ namespace DK.Tweening
     {
         public static void Color(float time, Color color)
         {
-                 if (target.GetComponent<UnityEngine.MeshRenderer>()) MeshColor(time, color);
-            else if (target.GetComponent<UnityEngine.SpriteRenderer>()) SpriteColor(time, color);
-            else if (target.GetComponent<UnityEngine.UI.Image>()) ImageColor(time, color);
-            else if (target.GetComponent<UnityEngine.UI.Text>()) TextColor(time, color);
-            else if (target.GetComponent<UnityEngine.LineRenderer>()) LineColor(time, color);
-            else if (target.GetComponent<UnityEngine.Light>()) LightColor(time, color);
-            else if (target.GetComponent<UnityEngine.Camera>()) CameraColor(time, color);
+            DKTweener tweener = target.GetComponent<DKTweener>();
+            if (tweener.colorMod == null)
+            {
+                     if (target.GetComponent<UnityEngine.MeshRenderer>()) tweener.colorMod = MeshColor;
+                else if (target.GetComponent<UnityEngine.SpriteRenderer>()) tweener.colorMod = SpriteColor;
+                else if (target.GetComponent<UnityEngine.UI.Image>()) tweener.colorMod = ImageColor;
+                else if (target.GetComponent<UnityEngine.UI.Text>()) tweener.colorMod = TextColor;
+                else if (target.GetComponent<UnityEngine.LineRenderer>()) tweener.colorMod = LineColor;
+                else if (target.GetComponent<UnityEngine.Light>()) tweener.colorMod = LightColor;
+                else if (target.GetComponent<UnityEngine.Camera>()) tweener.colorMod = CameraColor;
+            }
+
+            tweener.colorMod?.Invoke(time, color);
         }
 
         public static void Fade(float time, float value)
         {
-                 if (target.GetComponent<UnityEngine.MeshRenderer>()) MeshFade(time, value);
-            else if (target.GetComponent<UnityEngine.Light>()) LightIntensity(time, value);
-            else if (target.GetComponent<UnityEngine.SpriteRenderer>()) SpriteFade(time, value);
-            else if (target.GetComponent<UnityEngine.UI.Image>()) ImageFade(time, value);
-            else if (target.GetComponent<UnityEngine.UI.Text>()) TextFade(time, value);
-            else if (target.GetComponent<UnityEngine.CanvasGroup>()) CanvasFade(time, value);
+            DKTweener tweener = target.GetComponent<DKTweener>();
+            if (tweener.fadeMod == null)
+            {
+                if (target.GetComponent<UnityEngine.MeshRenderer>()) tweener.fadeMod = MeshFade;
+                else if (target.GetComponent<UnityEngine.Light>()) tweener.fadeMod = LightIntensity;
+                else if (target.GetComponent<UnityEngine.SpriteRenderer>()) tweener.fadeMod = SpriteFade;
+                else if (target.GetComponent<UnityEngine.UI.Image>()) tweener.fadeMod = ImageFade;
+                else if (target.GetComponent<UnityEngine.UI.Text>()) tweener.fadeMod = TextFade;
+                else if (target.GetComponent<UnityEngine.CanvasGroup>()) tweener.fadeMod = CanvasFade;
+            }
+
+            tweener.fadeMod?.Invoke(time, value);
         }
 
         public static void Move(float time, Vector3 dir)

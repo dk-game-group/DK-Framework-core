@@ -7,6 +7,12 @@ namespace DK
 {
     public abstract partial class DKTweener : DKComponent
     {
+        internal delegate void colorCall(float time, Color color);
+        internal delegate void fadeCall(float time, float alpha);
+
+        internal colorCall colorMod;
+        internal fadeCall fadeMod;
+
         public virtual void Fade(float time, float fade, params TweenParams[] par)
         {
             Sequence().Fade(time, fade, par);
@@ -23,3 +29,4 @@ namespace DK
         }
     }
 }
+

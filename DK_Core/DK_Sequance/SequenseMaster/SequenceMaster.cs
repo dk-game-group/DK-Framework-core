@@ -5,21 +5,38 @@ using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Core;
 
+//#nullable enable
+
 namespace DK.Tweening
 {
     public partial class SequenceMaster
     {
+        public enum BranchType { None, Main, Sync, Async }
+
         public static readonly DKSequence instance;
 
         public static GameObject target => branchStack.Peek().target;
         public static Sequence sequence => branchStack.Peek().sequence;
 
-        private static Stack<(GameObject target, Sequence sequence, BranchType type)> branchStack =
-                   new Stack<(GameObject target, Sequence sequence, BranchType type)>(5);
+        private static Stack<Branch> branchStack = new Stack<Branch>(5);
         
         public static Tween tween { get; private set; }
 
-        public enum BranchType {None, Main, Sync, Async}
+        static BranchType lastBranchType = BranchType.None;
+        
+        struct Branch
+        {
+            public Branch(GameObject _target)
+            {
+                target = _target;
+                sequence = DG.Tweening.DOTween.Sequence();
+                type = BranchType.None;
+            }
+
+            public GameObject target;
+            public Sequence sequence;
+            public BranchType type;
+        }
 
         static SequenceMaster()
         {
@@ -29,14 +46,12 @@ namespace DK.Tweening
         public static DKSequence CreateSequence(GameObject node, string name = "")
         {
             if (branchStack.Count > 1)
-                throw new System.Exception("Incorrect tweener usgage! There are unclosed branches!");
+                throw new System.Exception("Incorrect tweener usage! There are unclosed branches! Contact DK_Framework developer ASAP!");
 
             branchStack.Clear();
 
-            (GameObject target, Sequence sequence, BranchType type) branch;
-            branch.target = node;
-            branch.sequence = DG.Tweening.DOTween.Sequence();
-            branch.type = BranchType.Main;
+            Branch branch = new Branch(node);
+            lastBranchType = branch.type = BranchType.Main;            
 
             if (name != "")
                 branch.sequence.stringId = name;
@@ -46,27 +61,33 @@ namespace DK.Tweening
         }
 
         public static DKSequence CreateBranch(BranchType branchType)
-        {
-            if (branchStack.Peek().type == BranchType.None)
+        {                        
+            if (IsMasterSequenceAwalible() == false)
                 throw new System.Exception("Incorrect tween usage! There are no master sequence to branch from!");
 
-            (GameObject target, Sequence sequence, BranchType type) branch;
-
-            branch.target = target;
-            branch.sequence = DG.Tweening.DOTween.Sequence();
-            branch.type = BranchType.None; //error indicator
-
-            if (branchType == BranchType.Async)
+            bool IsMasterSequenceAwalible() 
             {
-                //Create separateSequense
-                branch.type = BranchType.Async;                
+                // TODO make protection more reliable
+                // can be broken by:
+                // - creating branch after creating sequence
+                if (branchStack.Count > 0)
+                {
+                    BranchType stackTopType = branchStack.Peek().type;
+                    if (stackTopType == BranchType.None)
+                        return false;
+                    else
+                        return true;
+                }
+                else
+                    return false;
             }
 
-            if (branchType == BranchType.Sync)
-            {
-                //Pause execution of current sequense                
-                branch.type = BranchType.Sync;
-            }
+            if(branchType == BranchType.Sync && lastBranchType == BranchType.Sync)
+                throw new System.Exception("Incorrect tween usage! You cannot declare two Sync branches back-to-back!");
+
+            Branch branch = new Branch(target);
+            branch.sequence.SetId(sequence.stringId); //give all branches same name to simplify control
+            lastBranchType = branch.type = branchType;
 
             branchStack.Push(branch);
 
@@ -75,7 +96,7 @@ namespace DK.Tweening
 
         public static void CloseBranch()
         {
-            (GameObject target, Sequence sequence, BranchType type) closedBranch = branchStack.Pop();
+            Branch closedBranch = branchStack.Pop();
 
             closedBranch.sequence.Pause();
 
@@ -83,25 +104,22 @@ namespace DK.Tweening
             {
                 Do(() => { closedBranch.sequence.Play(); });
             }
-
-            if (closedBranch.type == BranchType.Sync)
+            else if (closedBranch.type == BranchType.Sync)
             {
-                //sequence.Pause();
+                // sequence.Pause();
                 Do(() => {
                     sequence.Pause();
                     closedBranch.sequence.Play();
                 });
-                closedBranch.sequence.AppendCallback(() => {
-                    sequence.Play();
-                });
+                closedBranch.sequence.OnComplete(() => { sequence.Play(); });
             }
         }
-       
+
         public static void Loop(int count, LoopType type)
         {
             tween = null;
             sequence.SetLoops(count, type);
-        }        
+        }
 
         public static void Delay(float time)
         {
@@ -130,7 +148,7 @@ namespace DK.Tweening
         {
             tween = null;
             sequence.OnComplete(() => action());
-        }        
+        }
 
         public static void ApplyParams(TweenParams[] settings)
         {

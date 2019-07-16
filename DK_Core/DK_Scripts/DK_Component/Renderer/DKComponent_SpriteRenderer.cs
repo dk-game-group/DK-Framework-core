@@ -4,10 +4,9 @@ namespace DK
 {
     public abstract partial class DKComponent : MonoBehaviour
     {
-        SpriteRenderer _sprite;
-        public SpriteRenderer spriteRenderer => _sprite = _sprite ?? GetComponent<SpriteRenderer>();
+        public SpriteRenderer spriteRenderer => _renderer as SpriteRenderer;
 
-        public Sprite sprite => _sprite.sprite;
+        public Sprite sprite => spriteRenderer.sprite;
 
     }
 }

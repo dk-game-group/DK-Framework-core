@@ -14,6 +14,5 @@ namespace DK
         public Material[] lMaterials => _renderer.materials;
 
         public Shader shader => _renderer.material.shader;
-
     }
 }

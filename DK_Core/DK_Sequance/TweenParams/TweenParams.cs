@@ -4,11 +4,12 @@ namespace DK.Tweening
 {
     public class TweenParams
     {
-        enum Mode { Ease, None }
+        enum Mode { None, Ease }
 
         readonly Mode mode;
         readonly DG.Tweening.Ease ease;
 
+        //default ease params (copied from DOTween)
         readonly float overshot = 1.70158f;
         readonly float amplitude = 1.70158f;
         readonly float period;
