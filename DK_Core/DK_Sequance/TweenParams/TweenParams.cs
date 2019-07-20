@@ -1,4 +1,6 @@
-﻿using DG.Tweening;
+﻿using System.Runtime.CompilerServices;
+
+using DG.Tweening;
 
 namespace DK.Tweening
 {
@@ -35,6 +37,7 @@ namespace DK.Tweening
             this.period = period;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Apply()
         {
             if (this.mode == Mode.Ease)

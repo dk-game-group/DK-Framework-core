@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+
+using UnityEngine;
 
 using DG;
 using DG.Tweening;
@@ -7,6 +9,7 @@ namespace DK.Tweening
 {
     public static partial class SequenceMaster
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Color(float time, Color color)
         {
             DKTweener tweener = target.GetComponent<DKTweener>();
@@ -24,6 +27,7 @@ namespace DK.Tweening
             tweener.colorMod?.Invoke(time, color);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Fade(float time, float value)
         {
             DKTweener tweener = target.GetComponent<DKTweener>();
@@ -40,6 +44,7 @@ namespace DK.Tweening
             tweener.fadeMod?.Invoke(time, value);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Move(float time, Vector3 dir)
         {
             if (target.GetComponent<UnityEngine.RectTransform>())
@@ -48,6 +53,7 @@ namespace DK.Tweening
                 MoveTo(time, dir);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveX(float time, float pointX)
         {
             if (target.GetComponent<UnityEngine.RectTransform>())
@@ -56,6 +62,7 @@ namespace DK.Tweening
                 MoveToX(time, pointX);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveY(float time, float pointY)
         {
             if (target.GetComponent<UnityEngine.RectTransform>())
@@ -64,6 +71,7 @@ namespace DK.Tweening
                 MoveToX(time, pointY);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveZ(float time, float pointZ)
         {
             if (target.GetComponent<UnityEngine.RectTransform>())

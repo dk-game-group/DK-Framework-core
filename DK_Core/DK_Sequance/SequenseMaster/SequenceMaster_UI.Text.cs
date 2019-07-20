@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+
+using UnityEngine;
 
 using DG;
 using DG.Tweening;
@@ -7,6 +9,7 @@ namespace DK.Tweening
 {
     public static partial class SequenceMaster
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void TextColor(float time, Color color)
         {
             sequence.Append(
@@ -14,6 +17,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void TextFade(float time, float value)
         {
             sequence.Append(

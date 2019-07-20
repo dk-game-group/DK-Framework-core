@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+
+using UnityEngine;
 
 using DG;
 using DG.Tweening;
@@ -7,6 +9,7 @@ namespace DK.Tweening
 {
     public static partial class SequenceMaster
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RBMoveTo(float time, Vector3 point)
         {
             sequence.Append(
@@ -14,6 +17,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RBMoveToX(float time, float targetX)
         {
             sequence.Append(
@@ -21,6 +25,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RBMoveToY(float time, float targetY)
         {
             sequence.Append(
@@ -28,6 +33,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RBMoveToZ(float time, float targetZ)
         {
             sequence.Append(
@@ -35,6 +41,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RBRotate(float time, Vector3 angle)
         {
             sequence.Append(

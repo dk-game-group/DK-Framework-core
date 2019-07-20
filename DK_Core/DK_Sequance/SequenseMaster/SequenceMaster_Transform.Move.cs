@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+
+using UnityEngine;
 using UnityEngine.UI;
 
 using DG;
@@ -8,8 +10,7 @@ namespace DK.Tweening
 {
     public static partial class SequenceMaster
     {
-        //TODO add 2d ui support
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveTo(float time, Vector3 point)
         {
             sequence.Append(
@@ -17,6 +18,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveToX(float time, float targetX)
         {
             sequence.Append(
@@ -24,6 +26,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveToY(float time, float targetY)
         {
             sequence.Append(
@@ -31,6 +34,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveToZ(float time, float targetZ)
         {
             sequence.Append(
@@ -38,6 +42,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveBy(float time, Vector3 direction)
         {
             sequence.Append(
@@ -46,6 +51,7 @@ namespace DK.Tweening
         }
 
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveUITo(float time, Vector3 point)
         {
             sequence.Append(
@@ -53,6 +59,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveUIToX(float time, float targetX)
         {
             sequence.Append(
@@ -60,6 +67,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveUIToY(float time, float targetY)
         {
             sequence.Append(
@@ -67,6 +75,7 @@ namespace DK.Tweening
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveUIToZ(float time, float targetZ)
         {
             sequence.Append(
