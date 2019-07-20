@@ -13,17 +13,17 @@ namespace DK
         internal colorCall colorMod;
         internal fadeCall fadeMod;
 
-        public virtual void Fade(float time, float fade, params TweenParams[] par)
+        public virtual void Fade(float time, float fade, params ITweenParam[] par)
         {
             Sequence().Fade(time, fade, par);
         }
 
-        public virtual void Color(float time, float r, float g, float b, params TweenParams[] par)
+        public virtual void Color(float time, float r, float g, float b, params ITweenParam[] par)
         {
             Sequence().Color(time, new Color(r, g, b), par);
         }
 
-        public virtual void Color(float time, Color color, params TweenParams[] par)
+        public virtual void Color(float time, Color color, params ITweenParam[] par)
         {
             Sequence().Color(time, color, par);
         }

@@ -7,7 +7,7 @@ namespace DK
 {
     public abstract partial class DKTweener : DKComponent
     {
-        public virtual void Field(float time, float value, params TweenParams[] par)
+        public virtual void Field(float time, float value, params ITweenParam[] par)
         {
             Sequence().Field(time, value, par);
         }

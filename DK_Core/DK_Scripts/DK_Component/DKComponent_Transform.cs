@@ -8,6 +8,21 @@ namespace DK
         public new Transform transform => _transform = _transform ?? gameObject.transform;
         public Transform tr => transform;
 
+        RectTransform _rectTransform;
+        bool _rectTransformChecked;
+        public RectTransform rectTransform 
+        {
+            get
+            {
+                if (_rectTransform == null || _rectTransformChecked == false)
+                {
+                    _rectTransform = GetComponent<RectTransform>();
+                    _rectTransformChecked = true;
+                }
+                return _rectTransform;
+            }
+        }
+
         public Vector3 pos
         {
             get => tr.position;
@@ -18,6 +33,7 @@ namespace DK
             get => tr.localPosition;
             set => tr.localPosition = value;
         }
+
         public Quaternion rot
         {
             get => tr.rotation;

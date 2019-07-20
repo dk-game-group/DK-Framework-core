@@ -12,16 +12,15 @@ namespace DK.Tweening
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Color(float time, Color color)
         {
-            DKTweener tweener = target.GetComponent<DKTweener>();
             if (tweener.colorMod == null)
             {
-                     if (target.GetComponent<UnityEngine.MeshRenderer>()) tweener.colorMod = MeshColor;
+                     if (target.GetComponent<UnityEngine.MeshRenderer>())   tweener.colorMod = MeshColor;
                 else if (target.GetComponent<UnityEngine.SpriteRenderer>()) tweener.colorMod = SpriteColor;
-                else if (target.GetComponent<UnityEngine.UI.Image>()) tweener.colorMod = ImageColor;
-                else if (target.GetComponent<UnityEngine.UI.Text>()) tweener.colorMod = TextColor;
-                else if (target.GetComponent<UnityEngine.LineRenderer>()) tweener.colorMod = LineColor;
-                else if (target.GetComponent<UnityEngine.Light>()) tweener.colorMod = LightColor;
-                else if (target.GetComponent<UnityEngine.Camera>()) tweener.colorMod = CameraColor;
+                else if (target.GetComponent<UnityEngine.UI.Image>())       tweener.colorMod = ImageColor;
+                else if (target.GetComponent<UnityEngine.UI.Text>())        tweener.colorMod = TextColor;
+                else if (target.GetComponent<UnityEngine.LineRenderer>())   tweener.colorMod = LineColor;
+                else if (target.GetComponent<UnityEngine.Light>())          tweener.colorMod = LightColor;
+                else if (target.GetComponent<UnityEngine.Camera>())         tweener.colorMod = CameraColor;
             }
 
             tweener.colorMod?.Invoke(time, color);
@@ -30,15 +29,14 @@ namespace DK.Tweening
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Fade(float time, float value)
         {
-            DKTweener tweener = target.GetComponent<DKTweener>();
             if (tweener.fadeMod == null)
             {
-                if (target.GetComponent<UnityEngine.MeshRenderer>()) tweener.fadeMod = MeshFade;
-                else if (target.GetComponent<UnityEngine.Light>()) tweener.fadeMod = LightIntensity;
+                     if (target.GetComponent<UnityEngine.MeshRenderer>())   tweener.fadeMod = MeshFade;
+                else if (target.GetComponent<UnityEngine.Light>())          tweener.fadeMod = LightIntensity;
                 else if (target.GetComponent<UnityEngine.SpriteRenderer>()) tweener.fadeMod = SpriteFade;
-                else if (target.GetComponent<UnityEngine.UI.Image>()) tweener.fadeMod = ImageFade;
-                else if (target.GetComponent<UnityEngine.UI.Text>()) tweener.fadeMod = TextFade;
-                else if (target.GetComponent<UnityEngine.CanvasGroup>()) tweener.fadeMod = CanvasFade;
+                else if (target.GetComponent<UnityEngine.UI.Image>())       tweener.fadeMod = ImageFade;
+                else if (target.GetComponent<UnityEngine.UI.Text>())        tweener.fadeMod = TextFade;
+                else if (target.GetComponent<UnityEngine.CanvasGroup>())    tweener.fadeMod = CanvasFade;
             }
 
             tweener.fadeMod?.Invoke(time, value);
@@ -46,8 +44,8 @@ namespace DK.Tweening
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Move(float time, Vector3 dir)
-        {
-            if (target.GetComponent<UnityEngine.RectTransform>())
+        {      
+            if (tweener.rectTransform)
                 MoveUITo(time, dir);
             else
                 MoveTo(time, dir);
@@ -56,7 +54,7 @@ namespace DK.Tweening
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveX(float time, float pointX)
         {
-            if (target.GetComponent<UnityEngine.RectTransform>())
+            if (tweener.rectTransform)
                 MoveUIToX(time, pointX);
             else
                 MoveToX(time, pointX);
@@ -65,19 +63,19 @@ namespace DK.Tweening
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveY(float time, float pointY)
         {
-            if (target.GetComponent<UnityEngine.RectTransform>())
-                MoveUIToX(time, pointY);
+            if (tweener.rectTransform)
+                MoveUIToY(time, pointY);
             else
-                MoveToX(time, pointY);
+                MoveToY(time, pointY);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void MoveZ(float time, float pointZ)
         {
-            if (target.GetComponent<UnityEngine.RectTransform>())
-                MoveUIToX(time, pointZ);
+            if (tweener.rectTransform)
+                MoveUIToZ(time, pointZ);
             else
-                MoveToX(time, pointZ);
+                MoveToZ(time, pointZ);
         }
     }
 }

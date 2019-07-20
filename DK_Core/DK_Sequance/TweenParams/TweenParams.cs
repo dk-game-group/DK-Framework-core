@@ -4,22 +4,29 @@ using DG.Tweening;
 
 namespace DK.Tweening
 {
-    public class TweenParams
+    public struct TweenParams : ITweenParam
     {
         enum Mode { None, Ease }
 
         readonly Mode mode;
         readonly DG.Tweening.Ease ease;
+        
+        float overshot;
+        float amplitude;
+        float period;
 
         //default ease params (copied from DOTween)
-        readonly float overshot = 1.70158f;
-        readonly float amplitude = 1.70158f;
-        readonly float period;
+        const float defOvershoot = 1.70158f;
+        const float defAmplitude = 1.70158f;
 
         public TweenParams(DG.Tweening.Ease ease)
         {
             this.mode = Mode.Ease;
             this.ease = ease;
+
+            overshot = defOvershoot;
+            amplitude = defAmplitude;
+            period = 0;
         }
 
         public TweenParams(DG.Tweening.Ease ease, float overshot)
@@ -27,6 +34,9 @@ namespace DK.Tweening
             this.mode = Mode.Ease;
             this.ease = ease;
             this.overshot = overshot;
+            
+            amplitude = defAmplitude;
+            period = 0;
         }
 
         public TweenParams(DG.Tweening.Ease ease, float amplitude, float period)
@@ -35,6 +45,8 @@ namespace DK.Tweening
             this.ease = ease;
             this.amplitude = amplitude;
             this.period = period;
+
+            overshot = defOvershoot;            
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
