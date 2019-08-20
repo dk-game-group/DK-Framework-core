@@ -1,7 +1,8 @@
 {
     "name": "DK_Framework",
-    "references": [],
-    "optionalUnityReferences": [],
+    "references": [
+        "com.unity."
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
