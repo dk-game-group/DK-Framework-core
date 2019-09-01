@@ -46,7 +46,7 @@ namespace DK.Tweening
             this.amplitude = amplitude;
             this.period = period;
 
-            overshot = defOvershoot;            
+            overshot = defOvershoot;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
