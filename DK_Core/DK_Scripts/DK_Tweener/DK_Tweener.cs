@@ -38,7 +38,6 @@ namespace DK
         {
             for (int i = 0; i < sequences.Count; i++)
                 DestroySequence(sequences[i]);
-
         }
 
         public virtual void PauseTweens()

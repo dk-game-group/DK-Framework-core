@@ -9,13 +9,13 @@ namespace DK.Tweening
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static DKSequence Sync()
         {
-            return SequenceMaster.CreateBranch(SequenceMaster.BranchType.Sync);
+            return SequenceMaster.CreateBranch(SequenceMaster.Branch.Mode.Sync);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static DKSequence Async()
         {
-            return SequenceMaster.CreateBranch(SequenceMaster.BranchType.Async);
+            return SequenceMaster.CreateBranch(SequenceMaster.Branch.Mode.Async);
         }
     }
 }

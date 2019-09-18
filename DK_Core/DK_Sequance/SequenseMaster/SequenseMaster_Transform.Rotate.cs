@@ -27,7 +27,7 @@ namespace DK.Tweening
         public static void RotateBy(float time, Vector3 direction)
         {
             sequence.Append(
-              tween = target.transform.DOBlendableRotateBy(direction, time)
+              tween = target.transform.DOBlendableRotateBy(direction, time, RotateMode.FastBeyond360)
             );
         }
     }
