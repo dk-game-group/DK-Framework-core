@@ -1,9 +1,11 @@
 {
-  "name": "com.unity.dk.systems.core",
+  "name": "com.unity.dk.framework.core",
   "displayName": "DK Framework Core module",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "unity": "2019.2",
-  "description": "*** Some description ***",
+  "description": "Core DK framework module contain: \n * tween wraper \n * base shortcuts",
+
   "dependencies": {
+    "com.unity.demigiant.dotween" : "1.2.250"
   }
 }

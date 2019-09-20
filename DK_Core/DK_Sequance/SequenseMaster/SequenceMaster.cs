@@ -10,32 +10,40 @@ namespace DK.Tweening
 {
     public partial class SequenceMaster
     {
-        public enum BranchType { None, Main, Sync, Async }
-
-        public static readonly DKSequence instance;
-
-        public static GameObject target => branchStack.Peek().target;
-        public static DKTweener tweener { get; private set; }
         public static Sequence sequence => branchStack.Peek().sequence;
+        private static bool SequenceAutoKill = true;
 
-        private static Stack<Branch> branchStack = new Stack<Branch>(5);
+        internal static readonly DKSequence instance;
+
+        internal static GameObject target => branchStack.Peek().target;
+        internal static DKTweener tweener { get; private set; }
+
+        internal static Dictionary<Sequence, int> monitoring = new Dictionary<Sequence, int>(50);
+
+        static Branch branch => branchStack.Peek();
+
+        static Stack<Branch> branchStack = new Stack<Branch>(5);
         
         public static Tween tween { get; private set; }
 
-        static BranchType lastBranchType = BranchType.None;
-        
-        struct Branch
+        internal class Branch
         {
-            public Branch(GameObject _target)
+            internal enum Mode { None, Main, Sync, Async }
+
+            internal Branch(GameObject _target)
             {
                 target = _target;
                 sequence = DG.Tweening.DOTween.Sequence();
-                type = BranchType.None;
+                mode = Mode.None;
+
+                asyncBranchCount = 0;
             }
 
-            public GameObject target;
-            public Sequence sequence;
-            public BranchType type;
+            internal GameObject target;
+            internal Sequence sequence;
+            internal Mode mode;
+
+            internal int asyncBranchCount;
         }
 
         static SequenceMaster()
@@ -43,27 +51,28 @@ namespace DK.Tweening
             instance = new DKSequence();
         }
 
-        public static DKSequence CreateSequence(GameObject node, string name = "")
+        internal static DKSequence CreateSequence(GameObject node, string name = "", bool keepAlive = true)
         {
             if (branchStack.Count > 1)
                 throw new System.Exception("Incorrect tweener usage! There are unclosed branches! Contact DK_Framework developer ASAP!");
 
-            branchStack.Clear();
-
             Branch branch = new Branch(node);
-            lastBranchType = branch.type = BranchType.Main;
+            branch.mode = Branch.Mode.Main;
+            branch.sequence.SetAutoKill(SequenceAutoKill = !keepAlive);
+
             tweener = node.GetComponent<DKTweener>();
 
             if (name != "")
                 branch.sequence.stringId = name;
 
+            branchStack.Clear();
             branchStack.Push(branch);
-            
+
             return instance;
         }
 
-        public static DKSequence CreateBranch(BranchType branchType)
-        {                        
+        internal static DKSequence CreateBranch(Branch.Mode branchMode)
+        {
             if (IsMasterSequenceAwalible() == false)
                 throw new System.Exception("Incorrect tween usage! There are no master sequence to branch from!");
 
@@ -73,20 +82,17 @@ namespace DK.Tweening
                 // can be broken by:
                 // - creating branch after creating sequence
                 if (branchStack.Count > 0)
-                {
-                    BranchType stackTopType = branchStack.Peek().type;
-                    if (stackTopType == BranchType.None)
-                        return false;
-                    else
-                        return true;
-                }
+                    return (branchStack.Peek().mode != Branch.Mode.None);
                 else
                     return false;
             }
 
             Branch branch = new Branch(target);
             branch.sequence.SetId(sequence.stringId); //give all branches same name to simplify control
-            lastBranchType = branch.type = branchType;
+            branch.mode = branchMode;
+
+            if (branchMode == Branch.Mode.Async)
+                branchStack.Peek().sequence.SetAutoKill(SequenceAutoKill);
 
             branchStack.Push(branch);
 
@@ -96,16 +102,30 @@ namespace DK.Tweening
         public static void CloseBranch()
         {
             Branch closedBranch = branchStack.Pop();
+            Branch currentBranch = branchStack.Peek();
 
             closedBranch.sequence.Pause();
 
-            if (closedBranch.type == BranchType.Async)
+            if (closedBranch.mode == Branch.Mode.Async)
             {
-                closedBranch.sequence.SetAutoKill(false);
                 Do(() => { closedBranch.sequence.Play(); });
-                sequence.onKill += () => closedBranch.sequence.Kill();
+                sequence.onKill += () => {
+                    if (closedBranch.sequence.IsComplete())
+                        closedBranch.sequence.Kill();
+                    else
+                        closedBranch.sequence.SetAutoKill(true);
+                };
+                if (SequenceAutoKill == false)
+                {
+                    currentBranch.asyncBranchCount++;
+                    closedBranch.sequence.onKill += () => {
+                        currentBranch.asyncBranchCount--;
+                        if (currentBranch.asyncBranchCount == 0)
+                            currentBranch.sequence.Kill();
+                    };
+                }
             }
-            else if (closedBranch.type == BranchType.Sync)
+            else if (closedBranch.mode == Branch.Mode.Sync)
             {
                 sequence.Append(closedBranch.sequence);
             }
