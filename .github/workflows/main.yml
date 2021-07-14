@@ -12,5 +12,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upm_package_path: Packages/essential
+        upm_package_path: ./
         upm_tag_prefix: essential/v
