@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: remorses/bump-version@js
-        with:
+      with:
           version_file: ./package.json
           prerelease_tag: alpha
           github_token: ${{ secrets.GITHUB_TOKEN }}
