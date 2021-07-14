@@ -8,16 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: paulhatch/semantic-version@v4.0.2
-      with:
-        tag_prefix: "v"
-        major_pattern: "(MAJOR)"
-        minor_pattern: "(MINOR)"
-        format: "0.0.${increment}"
-        change_path: "src/my-service"
-        namespace: project-b
-        short_tags: true
-        bump_each_commit: false
+    - uses: remorses/bump-version@js
+        with:
+          version_file: ./package.json
+          prerelease_tag: alpha
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ignore: dist, ignored_folder
     - uses: quabug/create-upm-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
