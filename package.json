@@ -5,7 +5,4 @@
 	"version": "0.2.7",
 	"unity": "2019.2",
 	"description": "Core DK framework module contain: \n * tween wraper \n * base shortcuts",
-	"dependencies": {
-		"com.unity.demigiant.dotween": "1.2.250"
-	}
 }
