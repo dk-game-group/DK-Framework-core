@@ -18,7 +18,7 @@ jobs:
           ignore: dist, ignored_folder
           
     - name: Find UPM package.json & increment its version number
-      uses: AlexHolderDeveloper/UnityUPMSemver@v0.0.1 # Change vX.X.X to whatever tag is newer in the AlexHolderDeveloper/UnityUPMSemver repository.
+      uses: mempic/UnityUPMSemver@v0.0.1
       id: semver-update-upm
       with:
         semver-update-type: 'patch'
