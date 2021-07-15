@@ -31,6 +31,5 @@ jobs:
       with:
         node-version: 10
     
-    - uses: JS-DevTools/npm-publish@v1
-      run: npm publish –registry http://ghcr.io/${{ github.repository }}:testLable
+    - run: npm publish –registry http://ghcr.io/${{ github.repository }}:testLable
 #         token: ${{ secrets.GITHUB_TOKEN }}
