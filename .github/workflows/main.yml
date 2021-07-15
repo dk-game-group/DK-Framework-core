@@ -11,7 +11,7 @@ jobs:
     - uses: remorses/bump-version@js
       with:
           version_file: ./package.json
-          prerelease_tag: alpha
+          prerelease_tag: test
           github_token: ${{ secrets.GITHUB_TOKEN }}
           ignore: dist, ignored_folder
     - uses: quabug/create-upm-release@v1
