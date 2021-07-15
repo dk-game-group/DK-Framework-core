@@ -9,14 +9,7 @@ jobs:
       REGISTRY_NAME: ghcr.io
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-#     - uses: remorses/bump-version@js
-#       with:
-#           version_file: ./package.json
-#           prerelease_tag: test
-#           github_token: ${{ secrets.GITHUB_TOKEN }}          
-#           ignore: dist, ignored_folder
-          
+    - uses: actions/checkout@v2          
     - name: Find UPM package.json & increment its version number
       uses: mempic/UnityUPMSemver@main
       id: semver-update-upm
