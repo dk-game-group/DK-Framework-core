@@ -63,19 +63,6 @@ jobs:
 
         - name: Make sure we have an output directory for the legacy package
           run: mkdir legacyPackage
-
-        - name: Push package directory to subtree
-          uses: s0/git-publish-subdir-action@develop
-          env:
-            REPO: self
-            BRANCH: upm 
-            FOLDER: Assets/BigfootDS/BigfootUnityUtilities/
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-        - name: Build legacy Unity package
-          run: |
-            echo "Assets/BigfootDS/BigfootUnityUtilities/Runtime.meta" > metaList
-            find Assets/BigfootDS/BigfootUnityUtilities/Runtime/ -name \*.meta >> metaList
   
         - uses: pCYSl5EDgo/create-unitypackage@master
           with:
