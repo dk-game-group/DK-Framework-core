@@ -21,13 +21,13 @@ jobs:
 #       id: semver-update-upm
 #       with:
 #         semver-update-type: 'patch'
-#         upm-package-directory: '/'
+#         upm-package-directory: ''
           
     - uses: monry/actions-upm-publish@v1
       with:
         npm_registry_url: ${{ env.REGISTRY_NAME }}
         npm_auth_token: ${{ secrets.GITHUB_TOKEN }}
-        package_directory_path: ./
+        package_directory_path: ''
 
 #     - uses: quabug/create-upm-release@v1
 #       env:
