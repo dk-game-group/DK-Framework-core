@@ -4,7 +4,9 @@ name: Publish UPM Package
 on: workflow_dispatch
 
 jobs:
-  upm-release-essential:
+  upm-update-and-publish:
+    env:      
+      REGISTRY_NAME: ghcr.io
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -12,11 +14,16 @@ jobs:
       with:
           version_file: ./package.json
           prerelease_tag: test
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}          
           ignore: dist, ignored_folder
-    - uses: quabug/create-upm-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     - uses: actions/checkout@v2
+    - uses: monry/actions-upm-publish@v1
       with:
-        upm_package_path: ./
-        upm_tag_prefix: build/
+        npm_registry_url: ${{ env.REGISTRY_NAME }}
+        npm_auth_token: ${{ secrets.GITHUB_TOKEN }}
+#     - uses: quabug/create-upm-release@v1
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       with:
+#         upm_package_path: ./
+#         upm_tag_prefix: build/
