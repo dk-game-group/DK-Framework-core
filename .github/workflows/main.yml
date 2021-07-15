@@ -30,6 +30,11 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 10
+        
+    - uses: monry/actions-upm-publish@v1
+      with:
+        npm_registry_url: http://ghcr.io/${{ github.repository }}
+        npm_auth_token: ${{ secrets.GITHUB_TOKEN }}
     
-    - run: npm publish –registry http://ghcr.io/${{ github.repository }}
+#     - run: npm publish –registry http://ghcr.io/${{ github.repository }}
 #         token: ${{ secrets.GITHUB_TOKEN }}
