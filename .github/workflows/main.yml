@@ -39,11 +39,11 @@ jobs:
           uses: actions/checkout@v2
 
         - name: Find ProjectSettings.asset & increment its bundleVersion number
-          uses: AlexHolderDeveloper/UnityAutomatedSemver@v1.0.0 # Change v1.0.0 to whatever tag is newer in the AlexHolderDeveloper/UnityAutomatedSemver repository.
+          uses: mempic/UnityAutomatedSemver@v1.0.0 # Change v1.0.0 to whatever tag is newer in the AlexHolderDeveloper/UnityAutomatedSemver repository.
           id: semver-update
-          with:
+          with:            
             semver-update-type: 'patch' # Change this string to any suitable string mentioned in the Inputs section of this action's readme to suit your needs.
-      
+            upm-package-directory: ''
             # Validate that the number has been incremented correctly.
         - name: Get the new semver number
           run: echo "The new semver number for this Unity project is ${{ steps.semver-update.outputs.semver-number }}"
