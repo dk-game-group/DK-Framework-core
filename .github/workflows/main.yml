@@ -34,4 +34,4 @@ jobs:
     - uses: JS-DevTools/npm-publish@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        registry: ghcr.io/${{env.GITHUB_REPOSITORY}}:testLable
+        registry: ghcr.io/${{ github.repository }}:testLable
