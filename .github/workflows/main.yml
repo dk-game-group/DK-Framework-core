@@ -39,4 +39,4 @@ jobs:
 #         npm_auth_token: ${{ secrets.GITHUB_TOKEN }}
 #         package_directory_path: ''
         
-    - run: npm publish --tag latest --registry=https://npm.pkg.github.com --scope=${{ github.repository }}
+    - run: npm publish --registry=https://npm.pkg.github.com --scope=${{ github.repository }}
