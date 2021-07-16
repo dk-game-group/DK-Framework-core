@@ -33,5 +33,5 @@ jobs:
       with: 
         node-version: 10
     
-    - run: echo -e "drogerkerchva\n${{secrets.DK_PACK_TOKEN}}\nshaokan.hammer@gmail.com" npm login --scope=@DrogerKerchva --registry=https://npm.pkg.github.com
+    - run: echo -e "drogerkerchva\n${{secrets.DK_PACK_TOKEN}}\nshaokan.hammer@gmail.com" | npm login --scope=@DrogerKerchva --registry=https://npm.pkg.github.com
     - run: npm publish
