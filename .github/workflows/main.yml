@@ -27,16 +27,12 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+        branch: ${{ github.ref }}        
         
     - uses: actions/setup-node@v1
       with: 
         node-version: 10
-        
-#     - uses: mempic/actions-upm-publish@master
-#       with:
-#         npm_registry_url: http://ghcr.io/${{ github.repository }}:someLable
-#         npm_auth_token: ${{ secrets.GITHUB_TOKEN }}
-#         package_directory_path: ''
-    - run: echo -e "drogerkerchva\n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\nshaokan.hammer@gmail.com" | npm login
+
+    - run: npm install -g npm-cli-login
+    - run: npm-cli-login -u drogerkerchva -p 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 -e shaokan.hammer@gmail.com
     - run: npm publish 
