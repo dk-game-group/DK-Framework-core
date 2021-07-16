@@ -32,4 +32,6 @@ jobs:
     - uses: actions/setup-node@v1
       with: 
         node-version: 10
+    - run: npm install -g npm-cli-login
+    - run: npm-cli-login -u drogerkerchva -p ${{secrets.GITHUB_TOKEN}} -e shaokan.hammer@gmail.com -r https://npm.pkg.github.com -s @DrogerKerchva
     - run: npm publish
