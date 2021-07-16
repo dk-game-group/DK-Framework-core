@@ -33,11 +33,10 @@ jobs:
       with:
         node-version: 10
         
-    - uses: mempic/actions-upm-publish@master
-      with:
-        npm_registry_url: http://ghcr.io/${{ github.repository }}:someLable
-        npm_auth_token: ${{ secrets.GITHUB_TOKEN }}
-        package_directory_path: ''
+#     - uses: mempic/actions-upm-publish@master
+#       with:
+#         npm_registry_url: http://ghcr.io/${{ github.repository }}:someLable
+#         npm_auth_token: ${{ secrets.GITHUB_TOKEN }}
+#         package_directory_path: ''
         
-#     - run: npm publish –registry http://ghcr.io/${{ github.repository }}
-#         token: ${{ secrets.GITHUB_TOKEN }}
+    - run: npm publish --tag latest --registry http://ghcr.io/${{ GITHUB_REPOSITORY }} ''
