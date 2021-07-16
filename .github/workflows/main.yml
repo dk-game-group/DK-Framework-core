@@ -30,7 +30,7 @@ jobs:
         branch: ${{ github.ref }}
         
     - uses: actions/setup-node@v1
-      with:
+      with: 
         node-version: 10
         
 #     - uses: mempic/actions-upm-publish@master
