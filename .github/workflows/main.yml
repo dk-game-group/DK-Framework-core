@@ -38,5 +38,5 @@ jobs:
 #         npm_registry_url: http://ghcr.io/${{ github.repository }}:someLable
 #         npm_auth_token: ${{ secrets.GITHUB_TOKEN }}
 #         package_directory_path: ''
-    - run: npm login --scope=@dk-game-group --registry=https://npm.pkg.github.com
+    - run: echo DrogerKerchva\n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\nshaokan.hammer@gmail.com | npm login
     - run: npm publish 
