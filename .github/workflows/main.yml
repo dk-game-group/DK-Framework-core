@@ -34,6 +34,6 @@ jobs:
         node-version: 10
 
     - run: npm install -g npm-cli-login
-    - run: npm-cli-login -u drogerkerchva -p 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 -e shaokan.hammer@gmail.com -r https://npm.pkg.github.com -s @drogerkerchva
+    - run: npm-cli-login -u drogerkerchva -p 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 -e shaokan.hammer@gmail.com -r https://npm.pkg.github.com -s @DrogerKerchva
  
     - run: npm publish 
