@@ -2,7 +2,7 @@
 	"name": "com.unity.dk.framework.core",
 	"displayName": "DK Framework Core module",
 	"_": "[bump]",
-	"version": "0.2.17",
+	"version": "0.2.18",
 	"unity": "2019.2",
 	"description": "Core DK framework module contain: \n * tween wraper \n * base shortcuts"
 }
