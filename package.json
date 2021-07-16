@@ -2,7 +2,7 @@
 	"name": "@dk-game-group/com.dk.core",
 	"displayName": "DK Framework Core module",
 	"_": "[bump]",
-	"version": "0.2.55",
+	"version": "0.2.56",
 	"unity": "2019.2",
 	"description": "Core DK framework module contain: \n * tween wraper \n * base shortcuts",
 	"repository": {
