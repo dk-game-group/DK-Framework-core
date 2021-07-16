@@ -39,4 +39,4 @@ jobs:
 #         npm_auth_token: ${{ secrets.GITHUB_TOKEN }}
 #         package_directory_path: ''
         
-    - run: npm publish --tag latest --registry http://ghcr.io/${{ GITHUB_REPOSITORY }} ''
+    - run: npm publish --tag latest --registry http://ghcr.io/${{ github.repository }} ''
