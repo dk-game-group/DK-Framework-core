@@ -33,7 +33,7 @@ jobs:
       with:
         node-version: 10
         
-    - uses: monry/actions-upm-publish@v1
+    - uses: mempic/actions-upm-publish@master
       with:
         npm_registry_url: http://ghcr.io/${{ github.repository }}
         npm_auth_token: ${{ secrets.GITHUB_TOKEN }}
