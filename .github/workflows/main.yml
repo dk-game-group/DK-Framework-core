@@ -35,3 +35,4 @@ jobs:
     - run: npm install -g npm-cli-login
     - run: npm-cli-login -u drogerkerchva -p ${{secrets.DK_NPMJS_PASS}} -e shaokan.hammer@gmail.com -s @drogerkerchva
     - run: npm publish --access public
+
