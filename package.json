@@ -1,5 +1,5 @@
 {
-	"name": "com.dk.core",
+	"name": "@drogerkerchva/com.dk.core",
 	"displayName": "DK Framework Core module",
 	"_": "[bump]",
 	"version": "0.2.65",
