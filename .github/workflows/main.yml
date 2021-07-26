@@ -33,5 +33,5 @@ jobs:
       with: 
         node-version: 10
     - run: npm install -g npm-cli-login
-    - run: npm-cli-login -u drogerkerchva -p ${{secrets.DK_PACK_TOKEN}} -e shaokan.hammer@gmail.com -r https://npm.pkg.github.com -s @DrogerKerchva
+    - run: npm-cli-login -u drogerkerchva -p ${{secrets.DK_NPMJS_PASS}} -e shaokan.hammer@gmail.com -r https://npm.pkg.github.com -s @DrogerKerchva
     - run: npm publish
