@@ -1,5 +1,5 @@
 {
-	"name": "@dk-game-group/com.dk.core",
+	"name": "@drogerkerchva/com.dk.core",
 	"displayName": "DK Framework Core module",
 	"_": "[bump]",
 	"version": "0.2.57",
@@ -8,8 +8,5 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/dk-game-group/DK-Framework-core"
-	},
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/dk-game-group"
 	}
 }
