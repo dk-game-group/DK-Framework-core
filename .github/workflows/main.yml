@@ -9,20 +9,21 @@ jobs:
       REGISTRY_NAME: ghcr.io
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2          
-    - run: git reset --hard
-    - run: git pull
+    - uses: actions/checkout@v2
+    
     - name: Find UPM package.json & increment its version number
       uses: mempic/UnityUPMSemver@main
       id: semver-update-upm
       with:
         semver-update-type: 'patch'
         upm-package-directory: ''
+        
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git commit -m "Add changes" -a
+        
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
@@ -32,6 +33,7 @@ jobs:
     - uses: actions/setup-node@v1
       with: 
         node-version: 10
+        
     - run: npm install -g npm-cli-login
     - run: npm-cli-login -u drogerkerchva -p ${{secrets.DK_NPMJS_PASS}} -e shaokan.hammer@gmail.com
     - run: npm publish --access public
