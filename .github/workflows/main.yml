@@ -3,9 +3,9 @@ name: Publish UPM Package
 on: 
   push:
     branches:
-      - 0.*.*
+#       - 0.*.*
       - 1.*.*
-#       - 2.*.*
+      - 2.*.*
       - 3.*.*
       - 4.*.*
       - 5.*.*
